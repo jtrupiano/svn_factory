@@ -13,7 +13,7 @@ CWD = "./" #File.dirname(__FILE__)
 module SvnFactory
   module Server
   
-    PATH = File.join(File.dirname(__FILE__), 'repo')
+    PATH = File.join(CWD, 'repo')
   
     # creates a repo that will persist until a teardown is called
     def repo!(name='blah')
@@ -50,7 +50,7 @@ module SvnFactory
   # checkout of subversion repos
   module Client
   
-    PATH = File.join(File.dirname(__FILE__), 'checkout')
+    PATH = File.join(CWD, 'checkout')
   
     def checkout!(name='blah', path_from_repo_root='')
       path = File.join(PATH, name.to_s, path_from_repo_root)
@@ -62,7 +62,3 @@ module SvnFactory
   
   end
 end
-
-Test::Unit::TestCase.send(:include, SvnFactory::Server)
-Test::Unit::TestCase.send(:include, SvnFactory::Client)
-  

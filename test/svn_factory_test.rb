@@ -7,7 +7,10 @@ def should_have_file(file)
   end
 end
 
-class OurTest < Test::Unit::TestCase
+class SvnFactoryTest < Test::Unit::TestCase
+  include SvnFactory::Server
+  include SvnFactory::Client
+  
   context 'Given a repo named cms with a trunk with two files file1 and file2' do
     setup do
       @repo = repo!(:cms)

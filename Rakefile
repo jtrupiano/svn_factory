@@ -29,6 +29,17 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
+namespace :test do
+  desc 'Clean up test directories' 
+  task :clean do
+    `rm -rf checkout repo`
+  end
+end
+
+task :test => [:check_dependencies, 'test:clean']
+
+task :default => :test
+
 begin
   require 'rcov/rcovtask'
   Rcov::RcovTask.new do |test|
@@ -41,10 +52,6 @@ rescue LoadError
     abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
   end
 end
-
-task :test => :check_dependencies
-
-task :default => :test
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
